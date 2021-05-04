@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftDevCourse", "SoftDevCourse\SoftDevCourse.csproj", "{5A2C4ED3-B66D-4673-90A0-7906B38E0A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleLib", "TriangleLib\TriangleLib.csproj", "{7051BB0F-F9EA-40E2-8801-074119B84A43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1Lib", "Lab1Lib\Lab1Lib.csproj", "{7051BB0F-F9EA-40E2-8801-074119B84A43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriangleLib.Tests", "TriangleLib.Tests\TriangleLib.Tests.csproj", "{29A8267B-2AA6-4CB0-882D-95D7ECFA30AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1Lib.Tests", "Lab1Lib.Tests\Lab1Lib.Tests.csproj", "{29A8267B-2AA6-4CB0-882D-95D7ECFA30AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
