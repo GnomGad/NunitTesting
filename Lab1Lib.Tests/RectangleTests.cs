@@ -25,7 +25,6 @@ namespace Lab1Lib.Tests
         {
             Assert.Throws<ArgumentException>(
                 () => rectangle.SetVertices(x,y));
-            
         }
 
         [Description("Конструктор класса использует метод SetNegative, при отрицательном числе должна вылетать ArgumentException")]

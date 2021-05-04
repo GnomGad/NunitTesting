@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using System;
 
-
 namespace Lab1Lib.Tests
 {
     [TestFixture,  Description("Покрытие тестами класса треугольника")]
@@ -69,6 +68,5 @@ namespace Lab1Lib.Tests
             triangle.SetSides(a, b, c);
             Assert.AreEqual(triangle.Area(), res, 0.001);
         }
-
     }
 }

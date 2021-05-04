@@ -41,6 +41,5 @@ namespace Lab1Lib
         public bool IsNegative(double x) => x < 0;
 
         public bool IsNotTreangle(double a1, double a2, double x) => (a1 + a2) < x;
-
     }
 }

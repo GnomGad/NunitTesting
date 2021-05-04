@@ -12,7 +12,6 @@ namespace Lab1Lib
 
         public LinearEquationsSystem()
         {
-
         }
 
         /// <summary>
@@ -27,13 +26,14 @@ namespace Lab1Lib
         public void SetCoefficients(double[,] coeffs)
         {
             if (!IsCorrectSize(coeffs))
-                throw new FormatException("Bad size");// размерность непонятная
+                throw new FormatException("Bad size"); // размерность непонятная
 
-            if (MatrixDeterminant(coeffs) == (double)0)
+            double m = MatrixDeterminant(coeffs);
+
+            if (m <= 0.0f && m >= 0.0f)
                 throw new ArgumentException("Zero determinant");
 
             _matrix = coeffs;
-
         }
 
         /// <summary>

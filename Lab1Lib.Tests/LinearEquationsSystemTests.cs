@@ -7,7 +7,6 @@ namespace Lab1Lib.Tests
     [TestFixture, Description("Покрытие тестами класса системы линейных уравнений")]
     class LinearEquationsSystemTests
     {
-
         static object[] NotCorrectSizeMatrix =
         {
             new double[,] { { 1}, { 1} },

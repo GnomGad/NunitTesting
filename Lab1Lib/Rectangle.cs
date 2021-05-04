@@ -12,7 +12,6 @@ namespace Lab1Lib
         private double[] sides;
         public Rectangle()
         {
-
         }
 
         public Rectangle(double[] x, double[] y)
@@ -42,10 +41,10 @@ namespace Lab1Lib
 
         public bool IsReqctangle(double[] x, double[] y)
         {
-            int indexTopLeft = 0;// x<a y>b
-            int indexTopRight = 0;// x>a y>b
-            int indexBotLeft = 0;// x<a y<b
-            int indexBotRight = 0;// x>a y<b
+            int indexTopLeft = 0; // x<a y>b
+            int indexTopRight = 0; // x>a y>b
+            int indexBotLeft = 0; // x<a y<b
+            int indexBotRight = 0; // x>a y<b
             for (int i = 0; i < 4; i++)
             {
                 if (x[indexTopLeft] >= x[i] && y[indexTopLeft] <= y[i])
@@ -77,6 +76,5 @@ namespace Lab1Lib
             sides = new double[2]{ leftHeight, topWidth };
             return true;
         }
-
     }
 }
