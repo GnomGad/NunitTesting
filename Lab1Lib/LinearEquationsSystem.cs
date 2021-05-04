@@ -28,9 +28,7 @@ namespace Lab1Lib
             if (!IsCorrectSize(coeffs))
                 throw new FormatException("Bad size"); // размерность непонятная
 
-            double m = MatrixDeterminant(coeffs);
-
-            if (m <= 0.0f && m >= 0.0f)
+            if (MatrixDeterminant(coeffs) == 0.0f)
                 throw new ArgumentException("Zero determinant");
 
             _matrix = coeffs;
@@ -66,7 +64,6 @@ namespace Lab1Lib
            - coeffs[0, 0] * coeffs[2, 1] * coeffs[1, 2]
            - coeffs[0, 1] * coeffs[1, 0] * coeffs[2, 2]);
         }
-
 
         public double[] Solve()
         {
