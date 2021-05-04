@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="LinearEquationsSystem.cs" />
     <Compile Include="Rectangle.cs" />
+    <Compile Include="StringFormatter.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
