@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TriangleLib
+namespace Lab1Lib
 {
     public class Triangle
     {

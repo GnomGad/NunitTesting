@@ -1,8 +1,8 @@
 using NUnit.Framework;
-
 using System;
 
-namespace TriangleLib.Tests
+
+namespace Lab1Lib.Tests
 {
     [TestFixture,  Description("Покрытие тестами класса треугольника")]
     public class TriangleTests
@@ -25,7 +25,7 @@ namespace TriangleLib.Tests
                 () => triangle.SetSides(a, b, c));
         }
 
-        [Description("Конструктор класса использует метод SetNegative, при отрицательном числе должна вылетать FormatException")]
+        [Description("Конструктор класса использует метод SetSides, при отрицательном числе должна вылетать FormatException")]
         [TestCase(-3, 4, 5)]
         [TestCase(3, -4, 5)]
         [TestCase(3, 4, -5)]
