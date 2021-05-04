@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinearEquationsSystem.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
