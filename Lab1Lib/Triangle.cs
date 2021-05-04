@@ -29,6 +29,7 @@ namespace Lab1Lib
         {
             if (IsNegative(a) || IsNegative(b) || IsNegative(c))
                 throw new FormatException("Одна из сторон отрицательна");
+
             if (IsNotTreangle(a, b, c) || IsNotTreangle(a, c, b) || IsNotTreangle(b, c, a))
                 throw new ArgumentException("Такой треугольник невозможен");
 
@@ -39,7 +40,7 @@ namespace Lab1Lib
 
         public bool IsNegative(double x) => x < 0;
 
-        public bool IsNotTreangle(double a, double b, double x) => (a + b) < x;
+        public bool IsNotTreangle(double a1, double a2, double x) => (a1 + a2) < x;
 
     }
 }

@@ -50,10 +50,13 @@ namespace Lab1Lib
             {
                 if (x[indexTopLeft] >= x[i] && y[indexTopLeft] <= y[i])
                     indexTopLeft = i;
+
                 if (x[indexTopRight] <= x[i] && y[indexTopRight] <= y[i])
                     indexTopRight = i;
+
                 if (x[indexBotLeft] >= x[i] && y[indexBotLeft] >= y[i])
                     indexBotLeft = i;
+
                 if (x[indexBotRight] <= x[i] && y[indexBotRight] >= y[i])
                     indexBotRight = i;
             }
@@ -67,9 +70,11 @@ namespace Lab1Lib
             double botWidth = x[indexBotRight] - x[indexBotLeft];
             if (topWidth != botWidth)
                 throw new ArgumentException("Разные длины ширины");
-            if(topWidth+botWidth == 0 || leftHeight+rightHeight==0)
+
+            if(topWidth+botWidth == 0.0f || leftHeight+rightHeight==0.0f)
                 throw new ArgumentException("Разные длины ширины");
-            sides = new double[]{ leftHeight, topWidth };
+
+            sides = new double[2]{ leftHeight, topWidth };
             return true;
         }
 

@@ -28,6 +28,7 @@ namespace Lab1Lib
         {
             if (!IsCorrectSize(coeffs))
                 throw new FormatException("Bad size");// размерность непонятная
+
             if (MatrixDeterminant(coeffs) == (double)0)
                 throw new ArgumentException("Zero determinant");
 
@@ -42,12 +43,10 @@ namespace Lab1Lib
         /// <returns>true если верно</returns>
         public bool IsCorrectSize(double[,] coeffs)
         {
-            if ((coeffs.GetLength(0) == 2 && coeffs.GetLength(1) == 3) ||
-                (coeffs.GetLength(0) == 3 && coeffs.GetLength(1) == 4))
+            if ((coeffs.GetLength(0) == 2 && coeffs.GetLength(1) == 3) ||(coeffs.GetLength(0) == 3 && coeffs.GetLength(1) == 4))
                 return true;
-            else
-                return false;
 
+            return false;
         }
 
         /// <summary>
@@ -59,6 +58,7 @@ namespace Lab1Lib
         {
             if (coeffs.Length == 6)
                 return coeffs[0, 0] * coeffs[1, 1] - coeffs[0, 1] * coeffs[1, 0];
+
             return (coeffs[0, 0] * coeffs[1, 1] * coeffs[2, 2]
            + coeffs[1, 0] * coeffs[2, 1] * coeffs[0, 2]
            + coeffs[0, 1] * coeffs[1, 2] * coeffs[2, 0]
