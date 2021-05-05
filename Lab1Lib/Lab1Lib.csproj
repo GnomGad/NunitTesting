@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayProcessor.cs" />
     <Compile Include="LinearEquationsSystem.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="StringFormatter.cs" />
