@@ -30,7 +30,16 @@ namespace Lab2Lib
         {
             IfNullThrowException(dir);
             IfDirectoryNotFoundThrowException(dir);
-            string[] res = Encoding.UTF8.GetString(getContentFile(Path.Combine(dir, "ToRemove.txt"))).Split('\n');
+
+            string toRemoveFile = "ToRemove.txt";
+            string pathToRemoveFile = Path.Combine(dir, Path.Combine(dir, toRemoveFile));
+
+            if (!File.Exists(pathToRemoveFile))
+            {
+                throw new FileNotFoundException($"Файл {toRemoveFile} не найден");
+            }
+
+            string[] res = Encoding.UTF8.GetString(getContentFile(pathToRemoveFile)).Split('\n');
             return 0;
         }
 
@@ -82,8 +91,10 @@ namespace Lab2Lib
         {
             foreach (string s in files)
             {
-                File.Delete(s);
+                DeleteFile(s);
             }
         }
+
+        void DeleteFile(string file) => File.Delete(file);
     }
 }
