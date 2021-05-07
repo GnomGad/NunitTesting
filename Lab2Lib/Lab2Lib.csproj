@@ -47,5 +47,8 @@
     <Compile Include="ReportViewer.cs" />
     <Compile Include="StubFileService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
