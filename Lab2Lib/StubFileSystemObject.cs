@@ -42,19 +42,25 @@ namespace Lab2Lib
             foreach(string d in _dirs)
             {
                 if (d == path)
+                {
                     return true;
+                }
             }
 
             foreach (string f in _files)
             {
                 if (f == path)
+                {
                     return true;
+                }
             }
 
             foreach (string f in _toRemoveData)
             {
                 if (f == path)
+                {
                     return true;
+                }
             }
 
             if (path == _toRemove)

@@ -48,12 +48,12 @@ namespace Lab2Lib.Tests
         }
 
         [Test]
-        public void FileServiceConstructorInjection_MergeTemporaryFiles_NullReferenceException()
+        public void FileServiceConstructorInjection_MergeTemporaryFiles_ArgumentNullException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
             FileService f = new FileService(fs);
 
-            Assert.Throws<NullReferenceException>(() => f.MergeTemporaryFiles(null));
+            Assert.Throws<ArgumentNullException>(() => f.MergeTemporaryFiles(null));
         }
 
         [Test]
@@ -80,7 +80,6 @@ namespace Lab2Lib.Tests
         [Test]
         public void FileServiceProperyInjection_FileSystemObjectIsNull_ArgumentNullException()
         {
-            IFileSystemObject fs = new StubFileSystemObject();
             FileService f = new FileService();
 
             Assert.Throws<ArgumentNullException>(() => f.FileSystem = null);
@@ -97,12 +96,12 @@ namespace Lab2Lib.Tests
         }
 
         [Test]
-        public void FileServiceConstructorInjection_RemoveTemporaryFiles_NullReferenceException()
+        public void FileServiceConstructorInjection_RemoveTemporaryFiles_ArgumentNullException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
             FileService f = new FileService(fs);
 
-            Assert.Throws<NullReferenceException>(() => f.RemoveTemporaryFiles(null));
+            Assert.Throws<ArgumentNullException>(() => f.RemoveTemporaryFiles(null));
         }
 
         [Test]

@@ -8,14 +8,13 @@ namespace Lab2Lib
 {
     public class ReportViewer
     {
-        public int BlockCount { get; private set; } = 0;
-        public int UsedSize { get; private set; } = 0;
-
-        private IFileService _file;
+        public int BlockCount { get; private set; }
+        public int UsedSize { get; private set; }
+        public IFileService FS { get; private set; }
 
         public ReportViewer()
         {
-           _file = new FileService();
+           FS = new FileService();
         }
 
         /// <summary>
@@ -25,7 +24,7 @@ namespace Lab2Lib
         /// <param name="path"></param>
         public void PrepareDate(string path)
         {
-            int result = _file.MergeTemporaryFiles(path);
+            int result = FS.MergeTemporaryFiles(path);
             if (result == 0)
                 return;
             BlockCount = result;
@@ -33,14 +32,12 @@ namespace Lab2Lib
 
         public void Clean(string path)
         {
-            int result = 0;
             try
             {
-                UsedSize = _file.RemoveTemporaryFiles(path);
+                UsedSize = FS.RemoveTemporaryFiles(path);
             }
             catch
             {
-                return;
             }
         }
     }

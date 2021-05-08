@@ -97,7 +97,7 @@ namespace Lab2Lib
         {
             if (dir is null)
             {
-                throw new NullReferenceException("string is null");
+                throw new ArgumentNullException("string is null");
             }
         }
 
@@ -117,7 +117,7 @@ namespace Lab2Lib
                 bytes += buff[i].Length;
             }
             byte[] b = new byte[bytes];
-            for (int i = 0,counter =0; i < buff.Length; i++)
+            for (int i = 0, counter = 0; i < buff.Length; i++)
             {
                 for (int j = 0; j<buff[i].Length; j++, counter++)
                 {

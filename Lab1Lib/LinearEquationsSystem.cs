@@ -106,7 +106,9 @@ namespace Lab1Lib
                 {
                     double K = Matrix_Clone[i, k] / Matrix_Clone[k, k]; //Коэффициент
                     for (int j = 0; j < n + 1; j++) //j-номер столбца следующей строки после k
+                    {
                         Matrix_Clone[i, j] = Matrix_Clone[i, j] - Matrix_Clone[k, j] * K; //Зануление элементов матрицы ниже первого члена, преобразованного в единицу
+                    }
                 }
                 for (int i = 0; i < n; i++) //Обновление, внесение изменений в начальную матрицу
                 {
@@ -128,7 +130,9 @@ namespace Lab1Lib
                 {
                     double K = Matrix_Clone[i, k] / Matrix_Clone[k, k];
                     for (int j = n; j > -1; j--) //j-номер столбца следующей строки после k
+                    {
                         Matrix_Clone[i, j] = Matrix_Clone[i, j] - Matrix_Clone[k, j] * K;
+                    }
                 }
             }
 
