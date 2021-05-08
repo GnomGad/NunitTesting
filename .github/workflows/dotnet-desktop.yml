@@ -78,14 +78,22 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
+    - name: Codacy Coverage Reporter
+      # You may pin to the exact commit or the version.
+      # uses: codacy/codacy-coverage-reporter-action@3f58b0e12285221110375dffef1150534700246b
+      uses: codacy/codacy-coverage-reporter-action@1.0.0
+      with:
+        # API project token to retrieve your remote Codacy configuration for the project being analyzed
+        project-token: cb447952b3da4e4cb45ca76ad09c1eea
+        # API account token to retrieve your remote Codacy configuration for the project being analyzed
+        api-token: FVT7GdravCKK55sXlI6Y
+        # Optional comma separated list of coverage reports to send to Codacy
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
+        # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
-        Configuration: ${{ matrix.configuration }}
+          Configuration: ${{ matrix.configuration }}
 
     # Decode the base 64 encoded pfx and save the Signing_Certificate
     - name: Decode the pfx
