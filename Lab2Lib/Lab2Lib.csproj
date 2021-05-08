@@ -43,9 +43,10 @@
   <ItemGroup>
     <Compile Include="FileService.cs" />
     <Compile Include="IFileService.cs" />
+    <Compile Include="IFileSystemObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportViewer.cs" />
-    <Compile Include="StubFileService.cs" />
+    <Compile Include="StubFileSystemObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -9,32 +9,13 @@ namespace Lab2Lib
     public class ReportViewer
     {
         public int BlockCount { get; private set; } = 0;
+        public int UsedSize { get; private set; } = 0;
 
         private IFileService _file;
 
         public ReportViewer()
         {
-            File = new FileService();
-        }
-        public ReportViewer(IFileService file)
-        {
-            File = file;
-        }
-
-        public IFileService File
-        {
-            set 
-            { 
-                if(value is null)
-                {
-                    throw new ArgumentNullException("Передан null");
-                }
-                _file = value; 
-            }
-            get
-            {
-                return _file;
-            }
+           _file = new FileService();
         }
 
         /// <summary>
@@ -48,6 +29,19 @@ namespace Lab2Lib
             if (result == 0)
                 return;
             BlockCount = result;
+        }
+
+        public void Clean(string path)
+        {
+            int result = 0;
+            try
+            {
+                UsedSize = _file.RemoveTemporaryFiles(path);
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }
