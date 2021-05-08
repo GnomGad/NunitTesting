@@ -8,18 +8,18 @@ namespace Lab2Lib
 {
     public class StubFileSystemObject: IFileSystemObject
     {
-        private string[] _dirs;
-        private string[] _files;
-        private byte[][] _data;
+        private readonly string[] _dirs;
+        private readonly string[] _files;
+        private readonly byte[][] _data;
         private const int _fileCounter = 3;
 
-        private string _toRemove;
-        private string[] _toRemoveData;
+        private readonly string _toRemove;
+        private readonly string[] _toRemoveData;
         
         public StubFileSystemObject()
         {
             string path = Path.Combine("C:", "Lab2", "Tests");
-            _dirs = new string[] { Path.Combine("C:", "Lab2", "Tests"), Path.Combine("C:") };
+            _dirs = new [] { Path.Combine("C:", "Lab2", "Tests"), Path.Combine("C:") };
             _files = new string[_fileCounter] { "File1.tmp", "File2.tmp", "File3.tmp" };
             _data = new byte[_fileCounter][] {
                 Encoding.UTF8.GetBytes("s12312ad"),
@@ -35,7 +35,9 @@ namespace Lab2Lib
         public bool Exsists(string path)
         {
             if (path == "Hello.txt")
+            {
                 return false;
+            }
 
             foreach(string d in _dirs)
             {
@@ -56,7 +58,9 @@ namespace Lab2Lib
             }
 
             if (path == _toRemove)
+            {
                 return true;
+            }
 
             return false;
         }
@@ -64,7 +68,9 @@ namespace Lab2Lib
         public string[] GetFiles(string path)
         {
             if (path == Path.Combine("C:", "Lab2", "Tests"))
+            {
                 return _files;
+            }
             return new string[] { };
         }
 
@@ -73,7 +79,9 @@ namespace Lab2Lib
             for(int i = 0; i < _fileCounter; i++)
             {
                 if (_files[i] == file)
+                {
                     return _data[i];
+                }
             }
             return null;
         }
@@ -97,7 +105,9 @@ namespace Lab2Lib
             for (int i = 0; i < _fileCounter; i++)
             {
                 if (_files[i] == name)
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -107,7 +117,9 @@ namespace Lab2Lib
             for (int i = 0; i < _fileCounter; i++)
             {
                 if (_files[i] == Path.GetFileName(name))
+                {
                     return _files[i].Length;
+                }
             }
             return 0;
         }

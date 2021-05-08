@@ -38,7 +38,6 @@ namespace Lab1Lib
          * Нужно найти каждую из 4х вершин
          * Найти расстояние между вершинами
          */
-
         public bool IsReqctangle(double[] x, double[] y)
         {
             int indexTopLeft = 0; // x<a y>b
@@ -48,30 +47,44 @@ namespace Lab1Lib
             for (int i = 0; i < 4; i++)
             {
                 if (x[indexTopLeft] >= x[i] && y[indexTopLeft] <= y[i])
+                {
                     indexTopLeft = i;
+                }
 
                 if (x[indexTopRight] <= x[i] && y[indexTopRight] <= y[i])
+                {
                     indexTopRight = i;
+                }
 
                 if (x[indexBotLeft] >= x[i] && y[indexBotLeft] >= y[i])
+                {
                     indexBotLeft = i;
+                }
 
                 if (x[indexBotRight] <= x[i] && y[indexBotRight] >= y[i])
+                {
                     indexBotRight = i;
+                }
             }
 
             double leftHeight = y[indexTopLeft] - y[indexBotLeft];
             double rightHeight = y[indexTopRight] - y[indexBotRight];
             if (leftHeight != rightHeight)
+            {
                 throw new ArgumentException("Разные длины высоты");
+            }
 
             double topWidth = x[indexTopRight] - x[indexTopLeft];
             double botWidth = x[indexBotRight] - x[indexBotLeft];
             if (topWidth != botWidth)
+            {
                 throw new ArgumentException("Разные длины ширины");
+            }
 
-            if(topWidth+botWidth == 0.0f || leftHeight+rightHeight==0.0f)
+            if (topWidth + botWidth == 0.0f || leftHeight + rightHeight == 0.0f)
+            {
                 throw new ArgumentException("Разные длины ширины");
+            }
 
             sides = new double[2]{ leftHeight, topWidth };
             return true;

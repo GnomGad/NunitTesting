@@ -14,7 +14,9 @@ namespace Lab1Lib
             double[] new_a = a.Distinct().ToArray();
 
             for (int i = 0; i < new_a.Length; i++)
+            {
                 new_a[i] = GetChanged(new_a[i]);
+            }
 
             Sort(ref new_a);
             return new_a;

@@ -26,10 +26,14 @@ namespace Lab1Lib
         public void SetCoefficients(double[,] coeffs)
         {
             if (!IsCorrectSize(coeffs))
+            {
                 throw new FormatException("Bad size"); // размерность непонятная
+            }
 
             if (MatrixDeterminant(coeffs) == 0.0f)
+            {
                 throw new ArgumentException("Zero determinant");
+            }
 
             _matrix = coeffs;
         }
@@ -41,8 +45,10 @@ namespace Lab1Lib
         /// <returns>true если верно</returns>
         public bool IsCorrectSize(double[,] coeffs)
         {
-            if ((coeffs.GetLength(0) == 2 && coeffs.GetLength(1) == 3) ||(coeffs.GetLength(0) == 3 && coeffs.GetLength(1) == 4))
+            if ((coeffs.GetLength(0) == 2 && coeffs.GetLength(1) == 3) || (coeffs.GetLength(0) == 3 && coeffs.GetLength(1) == 4))
+            {
                 return true;
+            }
 
             return false;
         }
@@ -55,7 +61,9 @@ namespace Lab1Lib
         public double MatrixDeterminant(double[,] coeffs)
         {
             if (coeffs.Length == 6)
+            {
                 return coeffs[0, 0] * coeffs[1, 1] - coeffs[0, 1] * coeffs[1, 0];
+            }
 
             return (coeffs[0, 0] * coeffs[1, 1] * coeffs[2, 2]
            + coeffs[1, 0] * coeffs[2, 1] * coeffs[0, 2]
@@ -80,14 +88,20 @@ namespace Lab1Lib
             int n = Matrix.GetLength(0); //Размерность начальной матрицы (строки)
             double[,] Matrix_Clone = new double[n, n + 1]; //Матрица-дублер
             for (int i = 0; i < n; i++)
+            {
                 for (int j = 0; j < n + 1; j++)
+                {
                     Matrix_Clone[i, j] = Matrix[i, j];
+                }
+            }
 
             //Прямой ход (Зануление нижнего левого угла)
             for (int k = 0; k < n; k++) //k-номер строки
             {
                 for (int i = 0; i < n + 1; i++) //i-номер столбца
+                {
                     Matrix_Clone[k, i] = Matrix_Clone[k, i] / Matrix[k, k]; //Деление k-строки на первый член !=0 для преобразования его в единицу
+                }
                 for (int i = k + 1; i < n; i++) //i-номер следующей строки после k
                 {
                     double K = Matrix_Clone[i, k] / Matrix_Clone[k, k]; //Коэффициент
@@ -95,15 +109,21 @@ namespace Lab1Lib
                         Matrix_Clone[i, j] = Matrix_Clone[i, j] - Matrix_Clone[k, j] * K; //Зануление элементов матрицы ниже первого члена, преобразованного в единицу
                 }
                 for (int i = 0; i < n; i++) //Обновление, внесение изменений в начальную матрицу
+                {
                     for (int j = 0; j < n + 1; j++)
+                    {
                         Matrix[i, j] = Matrix_Clone[i, j];
+                    }
+                }
             }
 
             //Обратный ход (Зануление верхнего правого угла)
             for (int k = n - 1; k > -1; k--) //k-номер строки
             {
                 for (int i = n; i > -1; i--) //i-номер столбца
+                {
                     Matrix_Clone[k, i] = Matrix_Clone[k, i] / Matrix[k, k];
+                }
                 for (int i = k - 1; i > -1; i--) //i-номер следующей строки после k
                 {
                     double K = Matrix_Clone[i, k] / Matrix_Clone[k, k];
@@ -115,7 +135,9 @@ namespace Lab1Lib
             //Отделяем от общей матрицы ответы
             double[] Answer = new double[n];
             for (int i = 0; i < n; i++)
+            {
                 Answer[i] = Matrix_Clone[i, n];
+            }
 
             return Answer;
         }

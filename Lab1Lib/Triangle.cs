@@ -25,13 +25,17 @@ namespace Lab1Lib
             return s;
         }
 
-        public void SetSides(double a,double b, double c)
+        public void SetSides(double a, double b, double c)
         {
             if (IsNegative(a) || IsNegative(b) || IsNegative(c))
+            {
                 throw new FormatException("Одна из сторон отрицательна");
+            }
 
             if (IsNotTreangle(a, b, c) || IsNotTreangle(a, c, b) || IsNotTreangle(b, c, a))
+            {
                 throw new ArgumentException("Такой треугольник невозможен");
+            }
 
             _a = a;
             _b = b;

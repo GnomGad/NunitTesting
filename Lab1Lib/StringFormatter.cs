@@ -11,8 +11,10 @@ namespace Lab1Lib
     {
         private void IfNullThrowException(string s)
         {
-            if(s is null)
+            if (s is null)
+            {
                 throw new NullReferenceException("string is null");
+            }
         }
         public string SafeString(string s)
         {
@@ -29,10 +31,14 @@ namespace Lab1Lib
             IfNullThrowException(s);
 
             if (!s.Contains("://"))
+            {
                 s = "http://" + s;
+            }
 
             if (s.EndsWith(".git"))
+            {
                 s = "git://" + s;
+            }
 
             return s;
         }

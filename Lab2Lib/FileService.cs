@@ -8,9 +8,9 @@ namespace Lab2Lib
 {
     public class FileService: IFileService
     {
-        public readonly string NameBackup = "backup.tmp";
-        public readonly string ToRemove = "ToRemove.txt";
-        public readonly string ErrorLog = "error.log";
+        private readonly string NameBackup = "backup.tmp";
+        private readonly string ToRemove = "ToRemove.txt";
+        private readonly string ErrorLog = "error.log";
         private IFileSystemObject _fs;
         
         public FileService()
@@ -51,7 +51,9 @@ namespace Lab2Lib
             string[] files = _fs.GetFiles(dir);//получить данные
 
             if (files.Length == 0)
+            {
                 return 0;
+            }
 
             byte[][] buff = GetContentFiles(files);
             DeleteFiles(files);
@@ -67,7 +69,9 @@ namespace Lab2Lib
             string pathToRemove = Path.Combine(dir, ToRemove);
 
             if (!_fs.Exsists(pathToRemove))
+            {
                 throw new FileNotFoundException($"Файл {ToRemove} не найден");
+            }
 
             List<string> err = new List<string>();
 
@@ -92,13 +96,17 @@ namespace Lab2Lib
         private void IfNullThrowException(string dir)
         {
             if (dir is null)
+            {
                 throw new NullReferenceException("string is null");
+            }
         }
 
         private void IfDirectoryNotFoundThrowException(string dir)
         {
             if (!_fs.Exsists(dir))
+            {
                 throw new DirectoryNotFoundException($"Директория по пути {dir} не найдена");
+            }
         }
 
         void CreateBackup(string dir, byte[][] buff)
