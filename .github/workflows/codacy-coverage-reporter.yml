@@ -44,7 +44,6 @@ jobs:
       with:
         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           # or
-          # api-token: ${{ secrets.CODACY_API_TOKEN }}
         coverage-reports: coverage.xml
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
