@@ -32,3 +32,4 @@ jobs:
         with:
           # 
           github-token: ${{ secrets.COVERALL_REPO_TOKEN }}
+          path-to-lcov: coverage.xml
