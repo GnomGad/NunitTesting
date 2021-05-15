@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.IO;
+using Lab2Lib.Tests.Mocks;
 
 namespace Lab2Lib.Tests
 {
@@ -8,10 +9,21 @@ namespace Lab2Lib.Tests
     {
         private string _path;
 
+        ReportViewer _reportViewer;
+
+        MockFilseService _mockFileService;
+
         [OneTimeSetUp]
         public void Setup()
         {
             _path = Path.Combine("C:", "Lab2", "Tests");
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            _mockFileService = new MockFilseService();
+            _reportViewer = new ReportViewer(_mockFileService);
         }
 
         [Test]
@@ -53,5 +65,20 @@ namespace Lab2Lib.Tests
 
             Assert.AreEqual(rv.UsedSize, 0);
         }
+
+        [Test]
+        public void ReportViewer_PrepareData_MergeTemporaryFilesWasCalled()
+        {
+            _reportViewer.PrepareDate("sadas");
+            Assert.IsTrue(_mockFileService.MergeTemporaryFilesWasCalled);
+        }
+
+        [Test]
+        public void ReportViewer_Clean_RemoveTemporaryFilesWasCalled()
+        {
+            _reportViewer.Clean("sadas");
+            Assert.IsTrue(_mockFileService.RemoveTemporaryFilesWasCalled);
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using System.IO;
+using Lab2Lib.Tests.Mocks;
 
 namespace Lab2Lib.Tests
 {
@@ -11,10 +12,21 @@ namespace Lab2Lib.Tests
     {
         string _path;
 
+        FileService _fileService ;
+
+        MockFileSystemObject _mockFileSystemObject;
+
         [OneTimeSetUp]
-        public void Init()
+        public void Setup()
         {
             _path = Path.Combine("C:", "Lab2", "Tests");
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            _mockFileSystemObject = new MockFileSystemObject();
+            _fileService = new FileService(_mockFileSystemObject);
         }
 
         [Test]
@@ -131,6 +143,76 @@ namespace Lab2Lib.Tests
             int count = f.RemoveTemporaryFiles(_path);
 
             Assert.AreEqual(count, 27);
+        }
+
+        [Test]
+        public void FileService_MergeTemporaryFiles_ExsistsWasCalled()
+        {
+            _fileService.MergeTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.ExsistsWasCalled);
+        }
+
+        [Test]
+        public void FileService_MergeTemporaryFiles_GetFilesWasCalled()
+        {
+            _fileService.MergeTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.GetFilesWasCalled);
+        }
+
+        [Test]
+        public void FileService_MergeTemporaryFiles_GetFileDataWasCalled()
+        {
+            _fileService.MergeTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.GetFileDataWasCalled);
+        }
+    
+        [Test]
+        public void FileService_MergeTemporaryFiles_DeleteFileWasCalled()
+        {
+            _fileService.MergeTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.DeleteFileWasCalled);
+        } 
+
+        [Test]
+        public void FileService_MergeTemporaryFiles_CreateFileWasCalled()
+        {
+            _fileService.MergeTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.CreateFileWasCalled);
+        }
+
+        [Test]
+        public void FileService_RemoveTemporaryFiles_ExsistsWasCalled()
+        {
+            _fileService.RemoveTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.ExsistsWasCalled);
+        }
+
+        [Test]
+        public void FileService_RemoveTemporaryFiles_FileSizeWasCalled()
+        {
+            _fileService.RemoveTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.FileSizeWasCalled);
+        }
+
+        [Test]
+        public void FileService_RemoveTemporaryFiles_DeleteFileWasCalled()
+        {
+            _fileService.RemoveTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.DeleteFileWasCalled);
+        }
+
+        [Test]
+        public void FileService_RemoveTemporaryFiles_ReadLinesWasCalled()
+        {
+            _fileService.RemoveTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.ReadLinesWasCalled);
+        }
+
+        [Test]
+        public void FileService_RemoveTemporaryFiles_CreateFileWasCalled()
+        {
+            _fileService.RemoveTemporaryFiles(_path);
+            Assert.IsTrue(_mockFileSystemObject.CreateFileWasCalled);
         }
     }
 }
