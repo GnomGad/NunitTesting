@@ -16,6 +16,10 @@ namespace Lab2Lib
         {
            FS = new FileService();
         }
+        public ReportViewer(IFileService fs)
+        {
+            FS = fs;
+        }
 
         /// <summary>
         /// Этот метод должен сразу прекратить выполнение,если количество учтенных файлов было равно нулю
