@@ -3,6 +3,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f93903782b244e748deb764d1965d2d0)](https://www.codacy.com/gh/GnomGad/NunitTesting/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GnomGad/NunitTesting&amp;utm_campaign=Badge_Grade)
 ![GitHub top language](https://img.shields.io/github/languages/top/gnomgad/NunitTesting?style=flat)
 ![GitHub repo size](https://img.shields.io/github/repo-size/gnomgad/NunitTesting?style=flat)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/gnomgad/NunitTesting/Build)
 
 
 
