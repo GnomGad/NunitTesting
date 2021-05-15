@@ -43,6 +43,6 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test --no-restore --logger report.xml
+        run: dotnet test --no-restore
       - name: Codacy Coverage Reporter
         run: echo "bash <(curl -Ls https://coverage.codacy.com/get.sh) report \ -r report.xml \ --commit-uuid ${{ secrets.CODACY_PROJECT_TOKEN }}"
