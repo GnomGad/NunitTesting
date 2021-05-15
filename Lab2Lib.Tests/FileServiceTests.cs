@@ -4,6 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using System.IO;
 using Lab2Lib.Tests.Mocks;
+using Moq;
 
 namespace Lab2Lib.Tests
 {
@@ -13,8 +14,10 @@ namespace Lab2Lib.Tests
         string _path;
 
         FileService _fileService ;
-
         MockFileSystemObject _mockFileSystemObject;
+
+        Mock<IFileSystemObject> _mock;
+        FileService _fileS;
 
         [OneTimeSetUp]
         public void Setup()
@@ -27,9 +30,16 @@ namespace Lab2Lib.Tests
         {
             _mockFileSystemObject = new MockFileSystemObject();
             _fileService = new FileService(_mockFileSystemObject);
+
+            _mock = new Mock<IFileSystemObject>();
+            _fileS = new FileService(_mock.Object);
         }
 
-        [Test]
+        /*
+         * Стаб тесты с инъекцией через Конструктор
+         */
+
+        [Test, Description("Наличие файлов")]
         public void FileServiceConstructorInjection_MergeTemporaryFiles_3()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -39,7 +49,7 @@ namespace Lab2Lib.Tests
 
             Assert.AreEqual(count, 3);
         }
-        [Test]
+        [Test, Description("Файлы отстутствуют")]
         public void FileServiceConstructorInjection_MergeTemporaryFiles_0()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -50,7 +60,7 @@ namespace Lab2Lib.Tests
             Assert.AreEqual(count, 0);
         }
 
-        [Test]
+        [Test, Description("Передать в конструктор null")]
         public void FileServiceConstructorInjection_FileSystemObjectIsNull_ArgumentNullException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -59,7 +69,7 @@ namespace Lab2Lib.Tests
             Assert.Throws<ArgumentNullException>(() => f = new FileService(null));
         }
 
-        [Test]
+        [Test, Description("Передать в метод null")]
         public void FileServiceConstructorInjection_MergeTemporaryFiles_ArgumentNullException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -68,7 +78,7 @@ namespace Lab2Lib.Tests
             Assert.Throws<ArgumentNullException>(() => f.MergeTemporaryFiles(null));
         }
 
-        [Test]
+        [Test, Description("Указать несуществующую папку")]
         public void FileServiceConstructorInjection_MergeTemporaryFiles_DirectoryNotFoundException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -77,7 +87,11 @@ namespace Lab2Lib.Tests
             Assert.Throws<DirectoryNotFoundException>(() => f.MergeTemporaryFiles("D:\\Stab\\123213"));
         }
 
-        [Test]
+        /*
+         * Стаб тест с инъекцией через свойство
+         */
+
+        [Test, Description("Существующий путь с файлами")]
         public void FileServiceProperyInjection_MergeTemporaryFiles_3()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -89,7 +103,7 @@ namespace Lab2Lib.Tests
             Assert.AreEqual(count, 3);
         }
 
-        [Test]
+        [Test, Description("Указать через свойство null")]
         public void FileServiceProperyInjection_FileSystemObjectIsNull_ArgumentNullException()
         {
             FileService f = new FileService();
@@ -97,17 +111,17 @@ namespace Lab2Lib.Tests
             Assert.Throws<ArgumentNullException>(() => f.FileSystem = null);
         }
 
-        [Test]
+        [Test, Description("Удостоверится, что объект переданный через свойство тот же")]
         public void FileServiceProperyInjection_StubFileSystemObject_GetStubFileSystemObject()
         {
             IFileSystemObject fs = new StubFileSystemObject();
             FileService f = new FileService();
             f.FileSystem = fs;
 
-            Assert.AreEqual(f.FileSystem, fs);
+            Assert.AreSame(f.FileSystem, fs);
         }
 
-        [Test]
+        [Test, Description("Передать null в метод")]
         public void FileServiceConstructorInjection_RemoveTemporaryFiles_ArgumentNullException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -116,7 +130,7 @@ namespace Lab2Lib.Tests
             Assert.Throws<ArgumentNullException>(() => f.RemoveTemporaryFiles(null));
         }
 
-        [Test]
+        [Test, Description("Указать несуществующую папку")]
         public void FileServiceConstructorInjection_RemoveTemporaryFiles_DirectoryNotFoundException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -125,7 +139,7 @@ namespace Lab2Lib.Tests
             Assert.Throws<DirectoryNotFoundException>(() => f.RemoveTemporaryFiles("D:\\Stab\\123213"));
         }
 
-        [Test]
+        [Test, Description("Указать путь в котором нет файлов")]
         public void FileServiceConstructorInjection_RemoveTemporaryFiles_FileNotFoundException()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -134,7 +148,7 @@ namespace Lab2Lib.Tests
             Assert.Throws<FileNotFoundException>(() => f.RemoveTemporaryFiles("C:"));
         }
 
-        [Test]
+        [Test, Description("Указать путь с файлами")]
         public void FileServiceConstructorInjection_RemoveTemporaryFiles_3()
         {
             IFileSystemObject fs = new StubFileSystemObject();
@@ -144,6 +158,10 @@ namespace Lab2Lib.Tests
 
             Assert.AreEqual(count, 27);
         }
+
+        /*
+         * Рукописные мок тесты  MergeTemporaryFiles
+         */
 
         [Test]
         public void FileService_MergeTemporaryFiles_ExsistsWasCalled()
@@ -171,7 +189,7 @@ namespace Lab2Lib.Tests
         {
             _fileService.MergeTemporaryFiles(_path);
             Assert.IsTrue(_mockFileSystemObject.DeleteFileWasCalled);
-        } 
+        }
 
         [Test]
         public void FileService_MergeTemporaryFiles_CreateFileWasCalled()
@@ -179,6 +197,10 @@ namespace Lab2Lib.Tests
             _fileService.MergeTemporaryFiles(_path);
             Assert.IsTrue(_mockFileSystemObject.CreateFileWasCalled);
         }
+
+        /*
+         * Рукописные мок тесты  RemoveTemporaryFiles
+         */
 
         [Test]
         public void FileService_RemoveTemporaryFiles_ExsistsWasCalled()
@@ -213,6 +235,38 @@ namespace Lab2Lib.Tests
         {
             _fileService.RemoveTemporaryFiles(_path);
             Assert.IsTrue(_mockFileSystemObject.CreateFileWasCalled);
+        }
+
+        /*
+         * Тестирование с моков помощью Moq 
+         */
+
+        [Test]
+        public void FileService_MergeTemporaryFiles_Moq()
+        {
+            _mock.Setup(x => x.Exsists(It.IsAny<string>())).Returns(true);
+            _mock.Setup(x => x.GetFiles(It.IsAny<string>())).Returns(new string[]{ "File1.tmp", "File2.tmp", "File3.tmp" });
+            _mock.Setup(x => x.GetFileData(It.IsAny<string>())).Returns(new byte[] { });
+            _mock.Setup(x => x.DeleteFile(It.IsAny<string>())).Returns(true);
+            _mock.Setup(x => x.CreateFile(It.IsAny<string>(), It.IsAny<byte[]>())).Returns(true);
+
+            _fileS.MergeTemporaryFiles(_path);
+
+            _mock.VerifyAll();
+        }
+
+        [Test]
+        public void FileService_RemoveTemporaryFiles_Moq()
+        {
+            _mock.Setup(x => x.Exsists(It.IsAny<string>())).Returns(true);
+            _mock.Setup(x => x.ReadLines(It.IsAny<string>())).Returns(new string[] { "File1.tmp", "File2.tmp", "File3.tmp" });
+            _mock.Setup(x => x.FileSize(It.IsAny<string>())).Returns(1);
+            _mock.Setup(x => x.DeleteFile(It.IsAny<string>())).Returns(true);
+            _mock.Setup(x => x.CreateFile(It.IsAny<string>(), It.IsAny<byte[]>())).Returns(true);
+
+            _fileS.RemoveTemporaryFiles(_path);
+
+            _mock.VerifyAll();
         }
     }
 }

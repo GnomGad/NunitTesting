@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.IO;
 using Lab2Lib.Tests.Mocks;
+using Moq;
 
 namespace Lab2Lib.Tests
 {
@@ -10,8 +11,10 @@ namespace Lab2Lib.Tests
         private string _path;
 
         ReportViewer _reportViewer;
-
         MockFilseService _mockFileService;
+
+        Mock<IFileService> _mock;
+        ReportViewer _report;
 
         [OneTimeSetUp]
         public void Setup()
@@ -24,6 +27,9 @@ namespace Lab2Lib.Tests
         {
             _mockFileService = new MockFilseService();
             _reportViewer = new ReportViewer(_mockFileService);
+            
+            _mock = new Mock<IFileService>();
+            _report = new ReportViewer(_mock.Object);
         }
 
         [Test]
@@ -78,6 +84,26 @@ namespace Lab2Lib.Tests
         {
             _reportViewer.Clean("sadas");
             Assert.IsTrue(_mockFileService.RemoveTemporaryFilesWasCalled);
+        }
+
+        [Test]
+        public void ReportViewer_PrepareData_MoqMergeTemporaryFilesWasCalled()
+        {
+            _mock.Setup(x => x.MergeTemporaryFiles(It.IsAny<string>()));
+
+            _report.PrepareDate("sasd");
+
+            _mock.VerifyAll();
+        }
+
+        [Test]
+        public void ReportViewer_Clean_MoqRemoveTemporaryFilesWasCalled()
+        {
+            _mock.Setup(x => x.RemoveTemporaryFiles(It.IsAny<string>()));
+
+            _report.Clean("sasd");
+
+            _mock.VerifyAll();
         }
 
     }
