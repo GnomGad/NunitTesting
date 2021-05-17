@@ -18,6 +18,10 @@
 -  Научиться работать с зависимостями
 -  Научиться писать стабы и моки
 -  Научиться работать с Moq Framework
+-   Изучить BDD
+-   Научиться системному тестированию
+-   Научиться работать с Selenium WebDriver
+-   Научиться работать с Selenium IDE
 
 ## Ссылки
 
@@ -28,3 +32,4 @@
 | [Nunit docs](https://docs.nunit.org/articles/nunit/writing-tests/attributes.html)  | Документация по библиотеке Nunit  |
 | [Примеры Moq](https://habr.com/ru/post/150859/)| Кратко о том, как работать с фреймворком Moq|
 | [Видеокурс](https://itvdn.com/ru/video/unit-testing-csharp) | ITVDN Unit тестирование в C# (2016) PCRec|
+| [BDD для прагматиков](https://habr.com/ru/post/166747/)  | Статья по BDD |
