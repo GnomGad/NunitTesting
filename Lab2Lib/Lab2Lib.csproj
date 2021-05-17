@@ -46,10 +46,20 @@
     <Compile Include="IFileSystemObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportViewer.cs" />
+    <Compile Include="StringFormatter\IStringFormatter.cs" />
+    <Compile Include="SqlQueryPreparator.cs" />
+    <Compile Include="StringFormatter\StringFormatter.cs" />
+    <Compile Include="StringFormatter\StubStringFormatter.cs" />
     <Compile Include="StubFileSystemObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab1Lib\Lab1Lib.csproj">
+      <Project>{7051bb0f-f9ea-40e2-8801-074119b84a43}</Project>
+      <Name>Lab1Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
