@@ -4,7 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using SFormatter = Lab2Lib.StringFormatter.StringFormatter;
 using SFormatterStub = Lab2Lib.StringFormatter.StubStringFormatter;
-
+using Moq;
 
 namespace Lab2Lib.Tests
 {
@@ -19,6 +19,9 @@ namespace Lab2Lib.Tests
         readonly string[] _qExpectedStub = { "stub", "stub" };
 
         SqlQueryPreparator _sqp;
+        Mocks.MockStringFormatter _msf;
+
+        Mock<Lab2Lib.StringFormatter.IStringFormatter> _mockStringFormatter;
 
         [SetUp]
         public void Init()
@@ -59,6 +62,28 @@ namespace Lab2Lib.Tests
             CollectionAssert.AreEqual(res, _qExpectedStub);
         }
 
+        [Test]
+        public void SqlQueryPreparatorClassInjection_PrepareQueries_SafeStringWasCalled()
+        {
+            _msf = new Mocks.MockStringFormatter();
+            _sqp = new SqlQueryPreparator(_msf);
+            _sqp.PrepareQueries(_q);
+
+            Assert.IsTrue(_msf.SafeStringWasCalled);
+        }
+
+        [Test]
+        public void SqlQueryPreparatorClassInjection_PrepareQueries_MoqSafeStringWasCalled()
+        {
+            _mockStringFormatter = new Mock<StringFormatter.IStringFormatter>();
+            _sqp = new SqlQueryPreparator(_mockStringFormatter.Object);
+
+            _mockStringFormatter.Setup(x => x.SafeString(It.IsAny<string>()));
+
+            _sqp.PrepareQueries(_q);
+
+            _mockStringFormatter.VerifyAll();
+        }
 
         /*
          * Внедрение через Свойство
@@ -91,6 +116,29 @@ namespace Lab2Lib.Tests
             _sqp.SF = new SFormatterStub();
             string[] res = _sqp.PrepareQueries(_q);
             CollectionAssert.AreEqual(res, _qExpectedStub);
+        }
+
+        [Test]
+        public void SqlQueryPreparatorPropertiesInjection_PrepareQueries_SafeStringWasCalled()
+        {
+            _msf = new Mocks.MockStringFormatter();
+            _sqp.SF = _msf;
+            _sqp.PrepareQueries(_q);
+
+            Assert.IsTrue(_msf.SafeStringWasCalled);
+        }
+
+        [Test]
+        public void SqlQueryPreparatorPropertiesInjection_PrepareQueries_MoqSafeStringWasCalled()
+        {
+            _mockStringFormatter = new Mock<StringFormatter.IStringFormatter>();
+            _sqp.SF = _mockStringFormatter.Object;
+
+            _mockStringFormatter.Setup(x => x.SafeString(It.IsAny<string>()));
+
+            _sqp.PrepareQueries(_q);
+
+            _mockStringFormatter.VerifyAll();
         }
     }
 }
